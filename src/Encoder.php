@@ -59,8 +59,8 @@ class Encoder
         for($i = 0; $i < strlen($binaryCode); $i++) {
 
             if($previousBinaryNumber != $binaryCode[$i]) {
-                $previousNumber = $binaryCode[$i];
-                $result .= ($previousNumber == '0' ? ' 00 0' : ' 0 0');
+                $previousBinaryNumber = $binaryCode[$i];
+                $result .= ($previousBinaryNumber == '0' ? ' 00 0' : ' 0 0');
                 continue;
             }
 
