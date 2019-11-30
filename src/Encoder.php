@@ -33,13 +33,7 @@ class Encoder
         $binaryCode = "";
 
         for($i = 0; $i < strlen($characters); $i++) {
-            $binary = decbin(ord($characters[$i]));
-
-            if (strlen($binary) < self::BINARY_LENGTH) {
-                $binary = str_repeat("0" , self::BINARY_LENGTH - strlen($binary)) . $binary;
-            }
-
-            $binaryCode .= $binary;
+            $binaryCode .= (string) str_pad(decbin(ord($characters[$i])), 7, '0', STR_PAD_LEFT);
         }
 
         return $binaryCode;
