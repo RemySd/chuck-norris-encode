@@ -30,10 +30,15 @@ class Encoder
      */
     private static function getBinaryCode(string $characters): string
     {
-        $binaryCode = "";
+        $binaryCode = '';
 
         for($i = 0; $i < strlen($characters); $i++) {
-            $binaryCode .= (string) str_pad(decbin(ord($characters[$i])), 7, '0', STR_PAD_LEFT);
+            $binaryCode .= (string) str_pad(
+                decbin(ord($characters[$i])),
+                self::BINARY_LENGTH,
+                '0',
+                STR_PAD_LEFT
+            );
         }
 
         return $binaryCode;
@@ -48,22 +53,19 @@ class Encoder
      */
     private static function getChuckNorrisEncode(string $binaryCode): string
     {
-        $previousNumber = "";
-        $result = "";
+        $previousBinaryNumber = '';
+        $result = '';
 
         for($i = 0; $i < strlen($binaryCode); $i++) {
-            if($previousNumber != $binaryCode[$i]) {
-                $previousNumber = $binaryCode[$i];
 
-                if($binaryCode[$i] == "0") {
-                    $result .= " 00 0";
-                } else {
-                    $result .= " 0 0";
-                }
+            if($previousBinaryNumber != $binaryCode[$i]) {
+                $previousNumber = $binaryCode[$i];
+                $result .= ($previousNumber == '0' ? ' 00 0' : ' 0 0');
                 continue;
             }
 
-            $result .= "0";
+            $result .= '0';
+
         }
 
         return trim($result);
